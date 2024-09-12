@@ -18,6 +18,8 @@ const ImageWrapper = styled.div`
   padding: 10px;
 `;
 
+const BASE_PATH = '/nikhil-portfolio/';
+
 const PhotoshootPage = () => {
   const router = useRouter();
   const { id } = router.query;
@@ -40,7 +42,7 @@ const PhotoshootPage = () => {
             <Container>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {images.map((image) => (
-                  <div key={image} className="flex flex-col justify-between p-1">
+                  <div key={`${BASE_PATH}${image}`} className="flex flex-col justify-between p-1">
                     <Image
                       src={image}
                       alt={photoshoot.title}
