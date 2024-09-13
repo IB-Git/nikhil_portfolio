@@ -4,7 +4,7 @@ const PageTitle = () => {
   return (
     <div>
       <Head>
-        <title>Nikhil Nangre</title>
+        <title>Nikhil Nangare</title>
       </Head>
     </div>
   )
