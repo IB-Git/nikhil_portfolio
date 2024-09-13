@@ -18,12 +18,12 @@ const Lightbox = ({
   onNext,
 }: LightboxProps) => {
   const [loaded, setLoaded] = useState(false);
-  const [swiping, setSwiping] = useState(false);
-  
-  const [{ x, opacity }, api] = useSpring(() => ({
+  const [swipe, setSwipe] = useState(0);
+
+  // Setup spring for image animation
+  const [{ x }, api] = useSpring(() => ({
     x: 0,
-    opacity: 1,
-    config: { tension: 200, friction: 25 } // Adjust for smoothness
+    config: { tension: 180, friction: 20 } // Adjusted for stability
   }));
 
   const currentImage = images[selectedImageIndex];
@@ -33,31 +33,27 @@ const Lightbox = ({
   };
 
   const handleTouchStart = (e: React.TouchEvent) => {
-    setSwiping(true);
     const touch = e.touches[0];
-    api.start({ x: touch.clientX - window.innerWidth / 2 });
+    setSwipe(touch.clientX);
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    if (swiping) {
-      const touch = e.touches[0];
-      api.start({ x: touch.clientX - window.innerWidth / 2 });
-    }
+    const touch = e.touches[0];
+    const deltaX = touch.clientX - swipe;
+    api.start({ x: deltaX });
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    if (swiping) {
-      const touch = e.changedTouches[0];
-      const swipeDistance = touch.clientX - window.innerWidth / 2;
-      if (swipeDistance < -100) {
-        onNext(); // Swipe left
-      } else if (swipeDistance > 100) {
-        onPrev(); // Swipe right
-      } else {
-        api.start({ x: 0 }); // Reset position
-      }
-      setSwiping(false);
+    const touch = e.changedTouches[0];
+    const deltaX = touch.clientX - swipe;
+    const threshold = 50; // Threshold for swipe
+
+    if (deltaX < -threshold) {
+      onNext(); // Swipe left
+    } else if (deltaX > threshold) {
+      onPrev(); // Swipe right
     }
+    api.start({ x: 0 }); // Reset position
   };
 
   return (
@@ -81,8 +77,8 @@ const Lightbox = ({
       </button>
       <animated.div
         style={{
-          transform: x.to(x => `translateX(${x}px)`),
-          opacity
+          transform: x.to(x => `translateX(${x}px)`), // Subtle movement
+          opacity: x.to([0, 100], [1, 0.8]) // Subtle fade effect
         }}
         className="relative w-full h-full max-w-5xl max-h-[90vh] flex items-center justify-center"
       >
@@ -92,9 +88,9 @@ const Lightbox = ({
           layout="fill"
           objectFit="contain"
           placeholder="blur"
-          blurDataURL={currentImage} // Placeholder image URL, replace with an actual low-res image if needed
+          blurDataURL={currentImage} // Placeholder image URL
           onLoad={handleImageLoad}
-          quality={80} // Use a balanced quality to avoid performance hits
+          quality={80} // Use a balanced quality
           className={`transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'}`}
         />
       </animated.div>
