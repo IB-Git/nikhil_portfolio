@@ -18,45 +18,53 @@ const Lightbox = ({
   onNext,
 }: LightboxProps) => {
   const [loaded, setLoaded] = useState(false);
-
-  // Define the spring for swipe animation
-  const [{ x }, setSpring] = useSpring(() => ({
+  const [swiping, setSwiping] = useState(false);
+  
+  const [{ x, opacity }, api] = useSpring(() => ({
     x: 0,
-    config: { tension: 150, friction: 30 } // Adjust tension and friction here
+    opacity: 1,
+    config: { tension: 200, friction: 25 } // Adjust for smoothness
   }));
 
-  // Define the current image
   const currentImage = images[selectedImageIndex];
-
-  // Handle swipe gestures
-  const handleSwipe = (e: TouchEvent) => {
-    const touch = e.changedTouches[0];
-    const swipeDistance = touch.clientX;
-
-    if (swipeDistance < 0) {
-      onNext();
-    } else {
-      onPrev();
-    }
-  };
 
   const handleImageLoad = () => {
     setLoaded(true);
   };
 
-  // Attach touch event handlers
   const handleTouchStart = (e: React.TouchEvent) => {
-    e.preventDefault();
+    setSwiping(true);
+    const touch = e.touches[0];
+    api.start({ x: touch.clientX - window.innerWidth / 2 });
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (swiping) {
+      const touch = e.touches[0];
+      api.start({ x: touch.clientX - window.innerWidth / 2 });
+    }
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    handleSwipe(e.nativeEvent);
+    if (swiping) {
+      const touch = e.changedTouches[0];
+      const swipeDistance = touch.clientX - window.innerWidth / 2;
+      if (swipeDistance < -100) {
+        onNext(); // Swipe left
+      } else if (swipeDistance > 100) {
+        onPrev(); // Swipe right
+      } else {
+        api.start({ x: 0 }); // Reset position
+      }
+      setSwiping(false);
+    }
   };
 
   return (
     <div
       className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
       onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
       <button
@@ -73,7 +81,8 @@ const Lightbox = ({
       </button>
       <animated.div
         style={{
-          transform: x.to(x => `translateX(${x}px)`)
+          transform: x.to(x => `translateX(${x}px)`),
+          opacity
         }}
         className="relative w-full h-full max-w-5xl max-h-[90vh] flex items-center justify-center"
       >
@@ -100,7 +109,6 @@ const Lightbox = ({
 };
 
 export default Lightbox;
-
 
 
 // import { useState, useEffect } from 'react';
