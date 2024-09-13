@@ -50,7 +50,7 @@ const PhotoshootPage = () => {
       <Header />
       <div className="flex flex-col items-center mt-6 mb-2">
         <div className="container mx-auto px-4 sm:px-6 lg:px-20">
-          <div className="grid grid-cols-2 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-1">
+          <div className="grid grid-cols-2 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-1">
             {images.map((image, index) => (
               <div
                 key={index}
