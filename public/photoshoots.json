@@ -1,7 +1,7 @@
 [
   {
     "id": "A",
-    "title": "Photoshoot A",
+    "title": "shoot A",
     "heroImage": "/jaipur_rugs/A/CM_19868.jpg",
     "images": [
       "/jaipur_rugs/A/CM_19892.jpg",
@@ -17,7 +17,7 @@
   },
   {
     "id": "B",
-    "title": "Photoshoot B",
+    "title": "shoot B",
     "heroImage": "/jaipur_rugs/B/CM_18653.jpg",
     "images": [
       "/jaipur_rugs/B/CM_18631.jpg",
@@ -33,7 +33,7 @@
   },
   {
     "id": "C",
-    "title": "Photoshoot C",
+    "title": "shoot C",
     "heroImage": "/jaipur_rugs/C/DSCF5972.jpg",
     "images": [
       "/jaipur_rugs/C/DSCF5972.jpg",
@@ -44,7 +44,7 @@
   },
   {
     "id": "D",
-    "title": "Photoshoot D",
+    "title": "shoot D",
     "heroImage": "/jaipur_rugs/D/DSCF5966.jpg",
     "images": [
       "/jaipur_rugs/D/DSCF5898.jpg",
