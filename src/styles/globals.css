@@ -2,6 +2,77 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Nohemi";
+  src: url("/fonts/Nohemi-Regular.woff2") format("woff2");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Nohemi";
+  src: url("/fonts/Nohemi-Light.woff2") format("woff2");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Nohemi";
+  src: url("/fonts/Nohemi-Medium.woff2") format("woff2");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Noto Sans Devanagari";
+  src: url("https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap");
+}
+
+.devanagari-text {
+  font-family: "Noto Sans Devanagari", sans-serif;
+}
+
+/* Font weight utilities */
+.font-nohemi-regular {
+  font-family: "Nohemi", sans-serif;
+  font-weight: 400;
+}
+
+.font-nohemi-light {
+  font-family: "Nohemi", sans-serif;
+  font-weight: 300;
+}
+
+.font-nohemi-medium {
+  font-family: "Nohemi", sans-serif;
+  font-weight: 500;
+}
+
+.font-bold-about {
+  font-weight: 600;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1440px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 html {
   -webkit-text-size-adjust: none;
+}
+
+html,
+body {
+  font-family: "Nohemi", sans-serif;
+  font-weight: 400;
 }
