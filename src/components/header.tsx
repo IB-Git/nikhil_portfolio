@@ -13,14 +13,12 @@ const Header = () => {
       <header>
         <nav>
           <ul className="space-y-1">
-            {/* About Link */}
             <li>
               <Link href="/about" className="text-xl font-nohemi-regular font-bold-about">
                 About
               </Link>
             </li>
 
-            {/* Collection Names */}
             {photoshootsData.map((photoshoot) => (
               <li key={photoshoot.id}>
                 <Link
