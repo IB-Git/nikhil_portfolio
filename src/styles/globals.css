@@ -29,7 +29,6 @@
   font-family: "Noto Sans Devanagari", sans-serif;
 }
 
-/* Font weight utilities */
 .font-nohemi-regular {
   font-family: "Nohemi", sans-serif;
   font-weight: 400;
@@ -42,11 +41,11 @@
 
 .font-nohemi-medium {
   font-family: "Nohemi", sans-serif;
-  font-weight: 500;
+  font-weight: 350;
 }
 
 .font-bold-about {
-  font-weight: 600;
+  font-weight: 400;
 }
 
 @media (min-width: 1024px) {
