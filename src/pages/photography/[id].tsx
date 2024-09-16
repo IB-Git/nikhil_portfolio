@@ -4,17 +4,15 @@ import photoshootsData from '../../../public/photoshoots.json';
 import Image from 'next/image';
 import PageTitle from '../../components/pageTitle';
 import Header from '../../components/header';
-import Lightbox from '../../components/lightbox'; // Assuming you've created a Lightbox component
+import Lightbox from '../../components/lightbox'; 
 
 const PhotoshootPage = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  // Lightbox state
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
-  // Find the photoshoot data
   const photoshoot = photoshootsData.find((photo) => photo.id === id);
 
   if (!photoshoot) {
@@ -50,7 +48,7 @@ const PhotoshootPage = () => {
       <Header />
       <div className="flex flex-col items-center mt-6 mb-2">
         <div className="container mx-auto px-4 sm:px-6 lg:px-20">
-          <div className="grid grid-cols-2 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-1">
+          <div className="grid grid-cols-2 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-2 gap-1">
             {images.map((image, index) => (
               <div
                 key={index}
@@ -61,9 +59,9 @@ const PhotoshootPage = () => {
                   src={image}
                   alt={photoshoot.title}
                   layout="responsive"
-                  width={1200} // Placeholder values, actual aspect ratio is maintained
+                  width={1200}
                   height={1600}
-                  quality={50} // Reduced quality for thumbnails
+                  quality={50}
                   objectFit="cover"
                   className="hover:opacity-75 transition ease-in-out duration-300"
                 />
