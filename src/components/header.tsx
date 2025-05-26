@@ -9,7 +9,7 @@ const Header = () => {
   const defaultCollectionId = photoshootsData[0]?.id;
 
   return (
-    <div className="pt-4 pl-4 mb-2 lg:pt-8 lg:pl-8 lg:absolute left-0 top-0 lg:h-full lg:text-right">
+    <div className="pt-4 pl-4 mb-2 lg:pt-8 lg:pl-8 left-0 top-0 lg:h-full lg:text-right">
       <header>
         <nav>
           <ul className="space-y-1">
