@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import Header from './Header'
+import Header from '@/components/Header';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -9,7 +9,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className="min-h-screen bg-white text-black">
-      
+
       {/* Page Title & SEO (Integrated from PageTitle.tsx) */}
       <Head>
         <title>Nikhil Nangare Photography</title>      
