@@ -1,33 +1,21 @@
 [
   {
-    "id": "commercial",
-    "title": "Commercial Portfolio",
+    "id": "film",
+    "title": "Film",
     "images": [
-      "/jaipur_rugs/A/CM_19892.jpg",
-      "/jaipur_rugs/A/CM_19868.jpg",
-      "/jaipur_rugs/A/CM_19872.jpg",
-      "/jaipur_rugs/A/CM_19876.jpg",
-      "/jaipur_rugs/A/CM_19879.jpg",
-      "/jaipur_rugs/A/CM_19881.jpg",
-      "/jaipur_rugs/A/CM_19882.jpg",
-      "/jaipur_rugs/A/CM_19893.jpg",
-      "/jaipur_rugs/A/CM_19903.jpg",
-      "/jaipur_rugs/B/CM_18631.jpg",
-      "/jaipur_rugs/B/CM_18620.jpg",
-      "/jaipur_rugs/B/CM_18653.jpg",
-      "/jaipur_rugs/B/CM_18655.jpg",
-      "/jaipur_rugs/B/CM_18550.jpg",
-      "/jaipur_rugs/B/CM_18624.jpg",
-      "/jaipur_rugs/B/CM_18619.jpg",
-      "/jaipur_rugs/B/CM_18646.jpg",
-      "/jaipur_rugs/C/DSCF5972.jpg",
-      "/jaipur_rugs/C/DSCF5973.jpg",
-      "/jaipur_rugs/C/DSCF5976.jpg",
-      "/jaipur_rugs/C/DSCF5977.jpg",
-      "/jaipur_rugs/D/DSCF5898.jpg",
-      "/jaipur_rugs/D/DSCF5966.jpg",
-      "/jaipur_rugs/D/DSCF5907.jpg",
-      "/jaipur_rugs/D/DSCF5914.jpg"
+      "https://i.imgur.com/hVxK5ZE.jpeg",
+      "https://i.imgur.com/dorMZaf.jpeg",
+      "https://i.imgur.com/ztYB1wk.jpeg",
+      "https://i.imgur.com/zC1IGrD.jpeg",
+      "https://i.imgur.com/yOXr7aa.jpeg",
+      "https://i.imgur.com/7dR9FtO.jpeg"
+    ]
+  },
+  {
+    "id": "digital",
+    "title": "Digital",
+    "images": [
+     
     ]
   }
 ]
