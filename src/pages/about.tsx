@@ -6,7 +6,7 @@ function About() {
             Nikhil Nangare is a photographer based in Mumbai.
             Born and raised in Satara, he grew up surrounded by trees and mountains.
             He is fascinated by simple and mundane things around him
-            and his father's collection of old film stocks. 
+            and his father&apos;s collection of old film stocks. 
           </p>
         </div>
       </div>
