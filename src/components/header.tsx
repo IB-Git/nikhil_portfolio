@@ -6,7 +6,7 @@ const Header = () => {
 
   // Determine active states based on pathnames
   const isAboutActive = router.pathname === '/about';
-  const isCommercialActive = router.pathname === '/commercial';
+  const isfFilmActive = router.pathname === '/film';
   // The root path '/' is the default image grid (Personal).
   const isDefaultActive = router.pathname === '/'; 
 
@@ -26,17 +26,17 @@ const Header = () => {
         {/* Navigation Links */}
         <nav>
           <ul className="flex space-x-4 lg:space-x-8">             
-            {/* Commercial Link */}
+            {/* Film Link */}
             <li>
               <Link 
-                href="/commercial" 
+                href="/film" 
                 className={`text-base lg:text-2xl font-satoshi-regular transition duration-200 ${
-                  isCommercialActive 
+                  isFilmActive 
                     ? 'font-bold text-black' 
                     : 'hover:text-gray-700'
                 }`}
               >
-                COMMERCIAL
+                FILM
               </Link>
             </li>
             
