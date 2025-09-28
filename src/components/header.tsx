@@ -1,41 +1,64 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import photoshootsData from '../../public/photoshoots.json';
 
 const Header = () => {
   const router = useRouter();
-  const { id } = router.query;
-  
-  const defaultCollectionId = photoshootsData[0]?.id;
+
+  // Determine active states based on pathnames
+  const isAboutActive = router.pathname === '/about';
+  const isCommercialActive = router.pathname === '/commercial';
+  // The root path '/' is the default image grid (Personal).
+  const isDefaultActive = router.pathname === '/'; 
 
   return (
-    <div className="pt-4 pl-4 mb-2 lg:pt-8 lg:pl-8 lg:absolute left-0 top-0 lg:h-full lg:text-right">
-      <header>
+    <div className="px-8 lg:px-12 py-10 lg:py-12">
+      <div className="flex items-center space-x-8">
+        
+        {/* Home Link (Nikhil Nangare) */}
+        <Link 
+          href="/" 
+          className={`text-2xl lg:text-3xl font-satoshi-regular tracking-tight transition duration-200 ${
+            // The name is bold when active (on the root page)
+            isDefaultActive ? 'font-bold' : 'hover:text-gray-600' 
+          }`}
+        >
+          NIKHIL NANGARE
+        </Link>
+      
+        {/* Navigation Links */}
         <nav>
-          <ul className="space-y-1">
+          <ul className="flex space-x-6 lg:space-x-8 text-xl lg:text-2xl">
+            
+            {/* Commercial Link */}
             <li>
-              <Link href="/about" className="text-xl font-nohemi-regular font-bold-about">
-                About
+              <Link 
+                href="/commercial" 
+                className={`font-satoshi-regular transition duration-200 ${
+                  isCommercialActive 
+                    ? 'font-bold text-black' 
+                    : 'hover:text-gray-700'
+                }`}
+              >
+                COMMERCIAL
               </Link>
             </li>
-
-            {photoshootsData.map((photoshoot) => (
-              <li key={photoshoot.id}>
-                <Link
-                  href={`/photography/${photoshoot.id}`}
-                  className={`text-lg ${
-                    id === photoshoot.id || (!id && photoshoot.id === defaultCollectionId)
-                      ? 'font-nohemi-medium'
-                      : 'font-nohemi-light'
-                  }`}
-                >
-                  {photoshoot.title}
-                </Link>
-              </li>
-            ))}
+            
+            {/* About Link */}
+            <li>
+              <Link 
+                href="/about" 
+                className={`font-satoshi-regular transition duration-200 ${
+                  isAboutActive 
+                    ? 'font-bold text-black' 
+                    : 'hover:text-gray-700'
+                }`}
+              >
+                ABOUT
+              </Link>
+            </li>
           </ul>
         </nav>
-      </header>
+      </div>
     </div>
   );
 };

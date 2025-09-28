@@ -3,49 +3,42 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Nohemi";
-  src: url("/fonts/Nohemi-Regular.woff2") format("woff2");
+  font-family: "Satoshi";
+  src: url("/fonts/Satoshi-Light.otf") format("opentype");
+  font-weight: 300; /* Light */
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/Satoshi-Regular.otf") format("opentype");
+  font-weight: 400; /* Regular */
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/Satoshi-Medium.otf") format("opentype");
+  font-weight: 500; /* Medium */
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/Satoshi-Bold.otf") format("opentype");
+  font-weight: 700; /* Bold */
+}
+
+.font-satoshi-regular {
+  font-family: "Satoshi", sans-serif;
   font-weight: 400;
 }
 
-@font-face {
-  font-family: "Nohemi";
-  src: url("/fonts/Nohemi-Light.woff2") format("woff2");
+.font-satoshi-light {
+  font-family: "Satoshi", sans-serif;
   font-weight: 300;
 }
 
-@font-face {
-  font-family: "Nohemi";
-  src: url("/fonts/Nohemi-Medium.woff2") format("woff2");
+.font-satoshi-medium {
+  font-family: "Satoshi", sans-serif;
   font-weight: 500;
-}
-
-@font-face {
-  font-family: "Noto Sans Devanagari";
-  src: url("https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap");
-}
-
-.devanagari-text {
-  font-family: "Noto Sans Devanagari", sans-serif;
-}
-
-.font-nohemi-regular {
-  font-family: "Nohemi", sans-serif;
-  font-weight: 400;
-}
-
-.font-nohemi-light {
-  font-family: "Nohemi", sans-serif;
-  font-weight: 300;
-}
-
-.font-nohemi-medium {
-  font-family: "Nohemi", sans-serif;
-  font-weight: 350;
-}
-
-.font-bold-about {
-  font-weight: 400;
 }
 
 @media (min-width: 1024px) {
@@ -72,6 +65,6 @@ html {
 
 html,
 body {
-  font-family: "Nohemi", sans-serif;
+  font-family: "Satoshi", sans-serif;
   font-weight: 400;
 }

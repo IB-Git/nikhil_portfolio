@@ -1,8 +1,7 @@
 [
   {
-    "id": "A",
-    "title": "shoot A",
-    "heroImage": "/jaipur_rugs/A/CM_19868.jpg",
+    "id": "commercial",
+    "title": "Commercial Portfolio",
     "images": [
       "/jaipur_rugs/A/CM_19892.jpg",
       "/jaipur_rugs/A/CM_19868.jpg",
@@ -12,14 +11,7 @@
       "/jaipur_rugs/A/CM_19881.jpg",
       "/jaipur_rugs/A/CM_19882.jpg",
       "/jaipur_rugs/A/CM_19893.jpg",
-      "/jaipur_rugs/A/CM_19903.jpg"
-    ]
-  },
-  {
-    "id": "B",
-    "title": "राजस्थान की धुन",
-    "heroImage": "/jaipur_rugs/B/CM_18653.jpg",
-    "images": [
+      "/jaipur_rugs/A/CM_19903.jpg",
       "/jaipur_rugs/B/CM_18631.jpg",
       "/jaipur_rugs/B/CM_18620.jpg",
       "/jaipur_rugs/B/CM_18653.jpg",
@@ -27,31 +19,15 @@
       "/jaipur_rugs/B/CM_18550.jpg",
       "/jaipur_rugs/B/CM_18624.jpg",
       "/jaipur_rugs/B/CM_18619.jpg",
-      "/jaipur_rugs/B/CM_18646.jpg"
-      
-    ]
-  },
-  {
-    "id": "C",
-    "title": "shoot C",
-    "heroImage": "/jaipur_rugs/C/DSCF5972.jpg",
-    "images": [
+      "/jaipur_rugs/B/CM_18646.jpg",
       "/jaipur_rugs/C/DSCF5972.jpg",
       "/jaipur_rugs/C/DSCF5973.jpg",
       "/jaipur_rugs/C/DSCF5976.jpg",
-      "/jaipur_rugs/C/DSCF5977.jpg"
-    ]
-  },
-  {
-    "id": "D",
-    "title": "shoot D",
-    "heroImage": "/jaipur_rugs/D/DSCF5966.jpg",
-    "images": [
+      "/jaipur_rugs/C/DSCF5977.jpg",
       "/jaipur_rugs/D/DSCF5898.jpg",
       "/jaipur_rugs/D/DSCF5966.jpg",
       "/jaipur_rugs/D/DSCF5907.jpg",
       "/jaipur_rugs/D/DSCF5914.jpg"
-      
     ]
   }
 ]
