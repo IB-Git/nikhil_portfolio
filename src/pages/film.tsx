@@ -8,7 +8,7 @@ interface Photoshoot {
   images: string[];
 }
 
-const CommercialPage = () => {
+const FilmPage = () => {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const images: string[] = useMemo(() => {
@@ -38,7 +38,7 @@ const CommercialPage = () => {
   // ---------------------------------------
 
   if (!images.length) {
-    return <div className="text-center py-20 text-gray-500 text-xl">No commercial images found.</div>;
+    return <div className="text-center py-20 text-gray-500 text-xl">No film images found.</div>;
   }
 
   return (
@@ -53,7 +53,7 @@ const CommercialPage = () => {
             <div className="relative w-full h-auto" style={{ aspectRatio: '4/5' }}>
               <Image
                 src={image}
-                alt={`Commercial Image ${index}`}
+                alt={`Film Image ${index}`}
                 layout="fill" 
                 objectFit="contain" // Ensures no cropping
                 className="w-full h-full transition-opacity duration-300" 
@@ -78,4 +78,4 @@ const CommercialPage = () => {
   );
 };
 
-export default CommercialPage;
+export default FilmPage;
