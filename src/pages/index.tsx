@@ -1,33 +1,76 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import Image from 'next/image';
+import photoshootsData from '../../public/photoshoots.json'; 
 import Lightbox from '@/components/lightbox';
+
+interface Photoshoot {
+  images: string[];
+}
 
 const Home = () => {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
-  const images: string[] = []; 
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
-  const closeLightbox = () => setIsLightboxOpen(false);
+  const images: string[] = useMemo(() => {
+    return photoshootsData.find(item => item.id === 'digital')?.images || []; 
+  }, []);
+  
+  const openLightbox = (index: number) => {
+    setSelectedImageIndex(index);
+    setIsLightboxOpen(true);
+  };
 
-  // Home link shows empty content.
+  const closeLightbox = () => {
+    setIsLightboxOpen(false);
+  };
+
+  const handlePrevImage = () => {
+    setSelectedImageIndex((prevIndex) =>
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    );
+  };
+
+  const handleNextImage = () => {
+    setSelectedImageIndex((prevIndex) =>
+      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  if (!images.length) {
+    return <div className="py-20 text-center text-gray-500 text-xl">Personal stuff be here soon.</div>;
+  }
+
   return (
     <div> 
-      
-      {/* Show message */}
-      <div className="py-20 text-center text-gray-500 text-xl">
-        Personal stuff be here soon
-      </div>
-
-      {/* The empty grid structure */}
       <div className="grid grid-cols-2 gap-2 lg:gap-2"> 
-        {/* The grid is empty, but the structure remains. */}
+        {images.map((image: string, index: number) => (
+          <div 
+            key={index} 
+            className="w-full min-h-0 max-h-[90vh] cursor-pointer group flex justify-center items-center" 
+            onClick={() => openLightbox(index)}
+          >
+            <div className="relative w-full h-auto" style={{ aspectRatio: '4/5' }}>
+              <Image
+                src={image}
+                alt={`Digital Image ${index}`}
+                layout="fill" 
+                objectFit="contain"
+                className="w-full h-full transition-opacity duration-300" 
+                loading="lazy" 
+                quality={80}
+              />
+            </div>
+          </div>
+        ))}
       </div>
 
-      {isLightboxOpen && images.length > 0 && (
+      {isLightboxOpen && (
         <Lightbox
           images={images}
-          selectedImageIndex={0}
+          selectedImageIndex={selectedImageIndex}
           onClose={closeLightbox}
-          onPrev={() => {}}
-          onNext={() => {}}
+          onPrev={handlePrevImage}
+          onNext={handleNextImage}
         />
       )}
     </div>
