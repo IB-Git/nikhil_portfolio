@@ -3,8 +3,10 @@ function About() {
       <div className="flex flex-col items-start justify-start py-8 lg:py-16">
         <div className="max-w-xl text-left">
           <p className="text-xl lg:text-2xl font-satoshi-light leading-relaxed text-gray-950">
-            Nikhil Nangare is a photographer based in Mumbai ...
-            .
+            Nikhil Nangare is a photographer based in Mumbai.
+            Born and raised in Satara, he grew up surronded by trees and mountains.
+            He is fascinated by simple and mundane things around him
+            and his father's collection of old film stocks. 
           </p>
         </div>
       </div>
