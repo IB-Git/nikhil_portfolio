@@ -4,7 +4,7 @@ function About() {
         <div className="max-w-xl text-left">
           <p className="text-xl lg:text-2xl font-satoshi-light leading-relaxed text-gray-950">
             Nikhil Nangare is a photographer based in Mumbai.
-            Born and raised in Satara, he grew up surronded by trees and mountains.
+            Born and raised in Satara, he grew up surrounded by trees and mountains.
             He is fascinated by simple and mundane things around him
             and his father's collection of old film stocks. 
           </p>
