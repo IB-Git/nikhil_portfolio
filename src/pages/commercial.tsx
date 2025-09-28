@@ -43,7 +43,7 @@ const CommercialPage = () => {
 
   return (
     <div> 
-      <div className="grid grid-cols-2 gap-4 lg:gap-6"> 
+      <div className="grid grid-cols-2 gap-2 lg:gap-2"> 
         {images.map((image: string, index: number) => (
           <div 
             key={index} 

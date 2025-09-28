@@ -17,7 +17,7 @@ const Home = () => {
       </div>
 
       {/* The empty grid structure */}
-      <div className="grid grid-cols-2 gap-4 lg:gap-6"> 
+      <div className="grid grid-cols-2 gap-2 lg:gap-2"> 
         {/* The grid is empty, but the structure remains. */}
       </div>
 
