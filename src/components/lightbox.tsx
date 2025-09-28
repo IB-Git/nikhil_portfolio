@@ -1,5 +1,6 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
+import { useSpring, animated } from '@react-spring/web';
 
 interface LightboxProps {
   images: string[];
@@ -15,15 +16,54 @@ const Lightbox: React.FC<LightboxProps> = ({
   onClose,
   onPrev,
   onNext,
-}) => {
-  // Handle keyboard navigation for desktop users
+}: LightboxProps) => {
+  const [loaded, setLoaded] = useState(false);
+  const [swipeStart, setSwipeStart] = useState(0); 
+
+  // Setup spring for image animation
+  const [{ x }, api] = useSpring(() => ({
+    x: 0,
+    config: { tension: 180, friction: 20 }
+  }));
+
+  const currentImage = images[selectedImageIndex];
+
+  const handleImageLoad = () => {
+    setLoaded(true);
+  };
+
+  // --- Touch Handlers ---
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    setSwipeStart(touch.clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    const deltaX = touch.clientX - swipeStart;
+    api.start({ x: deltaX });
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const touch = e.changedTouches[0];
+    const deltaX = touch.clientX - swipeStart;
+    const threshold = 50; // Threshold for swipe
+
+    if (deltaX < -threshold) {
+      onNext(); // Swipe left
+    } else if (deltaX > threshold) {
+      onPrev(); // Swipe right
+    }
+    api.start({ x: 0 }); // Reset position
+  };
+
   const handleKeyDown = useCallback(
-    (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
         onClose();
-      } else if (event.key === 'ArrowLeft') {
+      } else if (e.key === 'ArrowLeft') {
         onPrev();
-      } else if (event.key === 'ArrowRight') {
+      } else if (e.key === 'ArrowRight') {
         onNext();
       }
     },
@@ -31,103 +71,63 @@ const Lightbox: React.FC<LightboxProps> = ({
   );
 
   useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown);
-    // Prevent scrolling when lightbox is open
+    document.addEventListener('keydown', handleKeyDown as any);
     document.body.style.overflow = 'hidden'; 
 
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('keydown', handleKeyDown as any);
       document.body.style.overflow = 'unset';
     };
   }, [handleKeyDown]);
-
-  const currentImage = images[selectedImageIndex];
 
   if (!currentImage) return null;
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 cursor-pointer"
-      onClick={onClose}
+      className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-[100]"
     >
-      {/* Container for image and controls */}
-      <div 
-        className="relative flex items-center justify-center w-full h-full p-4 md:p-8"
-        onClick={(e) => e.stopPropagation()} 
+
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-4 lg:top-6 lg:right-6 text-white text-3xl z-[110] p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition"
       >
-        <button
-          className="absolute left-4 lg:left-8 z-10 p-2 text-white bg-gray-800 bg-opacity-50 rounded-full lg:flex items-center justify-center hidden hover:bg-opacity-75 transition-colors duration-200" // 💥 FIX: Hidden on mobile, flex on large screens 💥
-          onClick={onPrev}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-        </button>
-
-        {/* Current Image */}
-        <div className="relative w-full h-full max-w-full max-h-full">
-          <Image
-            src={currentImage}
-            alt={`Lightbox image ${selectedImageIndex + 1}`}
-            layout="fill"
-            objectFit="contain" // Ensures the entire image is visible
-            className="w-full h-full"
-          />
-        </div>
-
-        {/* Next Button (Desktop only) */}
-        <button
-          className="absolute right-4 lg:right-8 z-10 p-2 text-white bg-gray-800 bg-opacity-50 rounded-full lg:flex items-center justify-center hidden hover:bg-opacity-75 transition-colors duration-200" // 💥 FIX: Hidden on mobile, flex on large screens 💥
-          onClick={onNext}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </button>
-
-        {/* Close Button (Desktop only) */}
-        <button
-          className="absolute top-4 right-4 lg:top-8 lg:right-8 z-10 p-2 text-white bg-gray-800 bg-opacity-50 rounded-full lg:flex items-center justify-center hidden hover:bg-opacity-75 transition-colors duration-200" // 💥 FIX: Hidden on mobile, flex on large screens 💥
-          onClick={onClose}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-      </div>
+        &times;
+      </button>
+      <button
+        onClick={onPrev}
+        className="absolute left-4 lg:left-6 text-white text-3xl z-[110] p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition"
+      >
+        &#8592;
+      </button>
+      
+      {/* 3. Animated Image Container */}
+      <animated.div
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        style={{
+          transform: x.to(x => `translateX(${x}px)`), 
+        }}
+        className="relative w-full h-full max-w-5xl max-h-[90vh] flex items-center justify-center p-4" 
+      >
+        <Image
+          src={currentImage}
+          alt="Selected Image"
+          layout="fill"
+          objectFit="contain"
+          placeholder="blur"
+          blurDataURL={currentImage} 
+          onLoad={handleImageLoad}
+          quality={80} 
+          className={`transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+        />
+      </animated.div>
+      <button
+        onClick={onNext}
+        className="absolute right-4 lg:right-6 text-white text-3xl z-[110] p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition"
+      >
+        &#8594;
+      </button>
     </div>
   );
 };
