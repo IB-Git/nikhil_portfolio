@@ -31,8 +31,7 @@ const Lightbox: React.FC<LightboxProps> = ({
   const handleImageLoad = () => {
     setLoaded(true);
   };
-
-  // --- Touch Handlers ---
+  
   const handleTouchStart = (e: React.TouchEvent) => {
     const touch = e.touches[0];
     setSwipeStart(touch.clientX);
@@ -47,27 +46,24 @@ const Lightbox: React.FC<LightboxProps> = ({
   const handleTouchEnd = (e: React.TouchEvent) => {
     const touch = e.changedTouches[0];
     const deltaX = touch.clientX - swipeStart;
-    const threshold = 50; // Threshold for swipe
+    const threshold = 50; 
 
     if (deltaX < -threshold) {
       onNext(); // Swipe left
     } else if (deltaX > threshold) {
       onPrev(); // Swipe right
     }
-    api.start({ x: 0 }); // Reset position
+    api.start({ x: 0 }); 
   };
+  // --------------------------------------------------------
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose();
-      } else if (e.key === 'ArrowLeft') {
-        onPrev();
-      } else if (e.key === 'ArrowRight') {
-        onNext();
-      }
+      } 
     },
-    [onClose, onPrev, onNext]
+    [onClose]
   );
 
   useEffect(() => {
@@ -86,21 +82,15 @@ const Lightbox: React.FC<LightboxProps> = ({
     <div
       className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-[100]"
     >
-
+        {/* CLOSE BUTTON (X) - Top Right - Clean Styling */}
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 lg:top-6 lg:right-6 text-white text-3xl z-[110] p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition"
+        className="absolute top-4 right-4 lg:top-6 lg:right-6 text-white text-4xl z-[110] p-4 font-bold hover:opacity-70 transition"
       >
         &times;
       </button>
-      <button
-        onClick={onPrev}
-        className="absolute left-4 lg:left-6 text-white text-3xl z-[110] p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition"
-      >
-        &#8592;
-      </button>
       
-      {/* 3. Animated Image Container */}
+      {/* Animated Image Container */}
       <animated.div
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
@@ -122,12 +112,6 @@ const Lightbox: React.FC<LightboxProps> = ({
           className={`transition-opacity duration-300 ${loaded ? 'opacity-100' : 'opacity-0'}`}
         />
       </animated.div>
-      <button
-        onClick={onNext}
-        className="absolute right-4 lg:right-6 text-white text-3xl z-[110] p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition"
-      >
-        &#8594;
-      </button>
     </div>
   );
 };
