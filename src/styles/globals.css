@@ -53,12 +53,6 @@
   }
 }
 
-@media (max-width: 640px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 html {
   -webkit-text-size-adjust: none;
 }

@@ -12,14 +12,12 @@ const Header = () => {
 
   return (
     <div className="px-8 lg:px-12 py-10 lg:py-12">
-      <div className="flex items-center space-x-8">
-        
-        {/* Home Link (Nikhil Nangare) */}
+      <div className="flex items-center space-x-4 lg:space-x-8"> 
+        {/* 1. NIKHIL NANGARE (Name) / home */}
         <Link 
           href="/" 
-          className={`text-2xl lg:text-3xl font-satoshi-regular tracking-tight transition duration-200 ${
-            // The name is bold when active (on the root page)
-            isDefaultActive ? 'font-bold' : 'hover:text-gray-600' 
+          className={`text-xl lg:text-3xl font-satoshi-regular tracking-tight transition duration-200 ${
+            isDefaultActive ? 'font-bold' : 'hover:text-gray-700' 
           }`}
         >
           NIKHIL NANGARE
@@ -27,13 +25,12 @@ const Header = () => {
       
         {/* Navigation Links */}
         <nav>
-          <ul className="flex space-x-6 lg:space-x-8 text-xl lg:text-2xl">
-            
+          <ul className="flex space-x-4 lg:space-x-8">             
             {/* Commercial Link */}
             <li>
               <Link 
                 href="/commercial" 
-                className={`font-satoshi-regular transition duration-200 ${
+                className={`text-lg lg:text-2xl font-satoshi-regular transition duration-200 ${
                   isCommercialActive 
                     ? 'font-bold text-black' 
                     : 'hover:text-gray-700'
@@ -47,7 +44,7 @@ const Header = () => {
             <li>
               <Link 
                 href="/about" 
-                className={`font-satoshi-regular transition duration-200 ${
+                className={`text-lg lg:text-2xl font-satoshi-regular transition duration-200 ${
                   isAboutActive 
                     ? 'font-bold text-black' 
                     : 'hover:text-gray-700'
