@@ -6,7 +6,7 @@ const Header = () => {
 
   // Determine active states based on pathnames
   const isAboutActive = router.pathname === '/about';
-  const isfFilmActive = router.pathname === '/film';
+  const isFilmActive = router.pathname === '/film';
   // The root path '/' is the default image grid (Personal).
   const isDefaultActive = router.pathname === '/'; 
 
