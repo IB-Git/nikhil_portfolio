@@ -57,7 +57,7 @@ const Home = () => {
   }
 
   return (
-    <div className="space-y-8 lg:space-y-16 p-4"> 
+    <div className="space-y-8 lg:space-y-32 p-4"> 
       {photoshoots.map((shoot) => {
         const imageCount = shoot.images.length;
         const gridClass = getGridClass(imageCount);
