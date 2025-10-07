@@ -15,14 +15,14 @@ function About() {
                 href="mailto:nikhilnangarework@gmail.com" 
                 className="hover:text-gray-700 transition duration-200"
               >
-                ✉️ nikhilnangarework@gmail.com
+                nikhilnangarework@gmail.com
               </a>
               <br/>
               <a 
                 href="tel:+918888291886" 
                 className="hover:text-gray-700 transition duration-200"
               >
-                📞 +91 8888291886
+                +91 8888291886
               </a>
             </p>
           </div>
