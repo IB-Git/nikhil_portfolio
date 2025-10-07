@@ -16,7 +16,6 @@ const getGridClass = (count: number) => {
   }
 };
 
-
 const Home = () => {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -70,23 +69,20 @@ const Home = () => {
             {shoot.images.map((imageURL: string) => (
               <div 
                 key={imageURL} 
-                className="w-full min-h-0 cursor-pointer flex justify-center items-stretch" 
+                className="w-full cursor-pointer" 
                 onClick={() => openLightbox(imageURL)}
               >
-                <div 
-                  className="relative w-full h-auto" 
-                  style={{ aspectRatio: '4/5' }} 
-                >
                   <Image
                     src={imageURL}
-                    alt={`Digital Image ${imageURL}`}
-                    layout="fill" 
-                    objectFit="cover"
-                    className="w-full h-full transition-opacity duration-300" 
+                    alt={`Film Image ${imageURL}`}
+                    width={1000}
+                    height={1000}
+                    layout="responsive"
+                    objectFit="contain"
+                    className="transition-opacity duration-300" 
                     loading="lazy" 
                     quality={80}
                   />
-                </div>
               </div>
             ))}
           </div>

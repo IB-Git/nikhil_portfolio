@@ -70,23 +70,20 @@ const FilmPage = () => {
             {shoot.images.map((imageURL: string) => (
               <div 
                 key={imageURL} 
-                className="w-full min-h-0 cursor-pointer flex justify-center items-stretch" 
+                className="w-full cursor-pointer" 
                 onClick={() => openLightbox(imageURL)}
               >
-                <div 
-                  className="relative w-full h-auto" 
-                  style={{ aspectRatio: '4/5' }} 
-                >
                   <Image
                     src={imageURL}
                     alt={`Film Image ${imageURL}`}
-                    layout="fill" 
-                    objectFit="cover"
-                    className="w-full h-full transition-opacity duration-300" 
+                    width={1000}
+                    height={1000}
+                    layout="responsive"
+                    objectFit="contain"
+                    className="transition-opacity duration-300" 
                     loading="lazy" 
                     quality={80}
                   />
-                </div>
               </div>
             ))}
           </div>

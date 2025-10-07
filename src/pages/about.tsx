@@ -9,15 +9,18 @@ function About() {
             and his father&apos;s collection of old film stocks.
           </p>
           
-          <div className="mt-8">
-            <p className="text-xl lg:text-2xl font-satoshi-light leading-relaxed text-gray-750">
+          <div className="mt-8 flex justify-between w-full">
+            
+            <p className="text-lg lg:text-xl font-satoshi-light leading-relaxed text-gray-750">
               <a 
                 href="mailto:nikhilnangarework@gmail.com" 
                 className="hover:text-gray-700 transition duration-200"
               >
                 nikhilnangarework@gmail.com
               </a>
-              <br/>
+            </p>
+
+            <p className="text-lg lg:text-xl font-satoshi-light leading-relaxed text-gray-750">
               <a 
                 href="tel:+918888291886" 
                 className="hover:text-gray-700 transition duration-200"
@@ -25,6 +28,7 @@ function About() {
                 +91 8888291886
               </a>
             </p>
+            
           </div>
         </div>
       </div>
