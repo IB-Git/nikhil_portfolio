@@ -1,5 +1,3 @@
-// File: src/pages/index.tsx
-
 import { useState, useMemo } from 'react';
 import Image from 'next/image';
 import photoshootsData from '../../public/photoshoots.json'; 
@@ -7,28 +5,27 @@ import Lightbox from '@/components/lightbox';
 
 const getAllImages = (data: typeof photoshootsData, categoryId: string): string[] => {
   const category = data.find(item => item.id === categoryId);
-  if (!category || !category.photoshoots) return [];
-  
+  if (!category || !('photoshoots' in category)) {
+      if ('images' in category) return category.images;
+      return [];
+  }
   return category.photoshoots.flatMap(shoot => shoot.images);
 };
 
 const getGridClass = (count: number) => {
-  // Use 'lg:' prefix for big screen layout
   switch (count) {
     case 1:
-      // 1 image: 100% width
       return 'lg:grid-cols-1';
     case 2:
-      // 2 images: 50% width each
       return 'lg:grid-cols-2'; 
     case 3:
-      // 3 images: 33.3% width each
       return 'lg:grid-cols-3'; 
-    // Default to 4 columns for any other count, keeping consistent with Tailwind's small screen default
     default:
       return 'lg:grid-cols-4'; 
   }
 };
+// -----------------------------------------------------------------
+
 
 const Home = () => {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
@@ -39,7 +36,7 @@ const Home = () => {
   }, []);
   
   const digitalCategory = photoshootsData.find(item => item.id === 'digital');
-  const photoshoots = digitalCategory?.photoshoots || []; 
+  const photoshoots = digitalCategory && 'photoshoots' in digitalCategory ? digitalCategory.photoshoots : [];
 
   const openLightbox = (imageURL: string) => {
     const index = allImages.findIndex(img => img === imageURL);
@@ -68,7 +65,7 @@ const Home = () => {
   }
 
   return (
-    <div className="space-y-4 lg:space-y-8 p-4"> 
+    <div className="space-y-16 lg:space-y-24 p-4"> 
       {photoshoots.map((shoot) => {
         const imageCount = shoot.images.length;
         const gridClass = getGridClass(imageCount);
