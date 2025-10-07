@@ -49,23 +49,20 @@ const Lightbox: React.FC<LightboxProps> = ({
     const threshold = 50; 
 
     if (deltaX < -threshold) {
-      onNext(); // Swipe left -> Next image
+      onNext();
     } else if (deltaX > threshold) {
-      onPrev(); // Swipe right -> Previous image
+      onPrev();
     }
     api.start({ x: 0 }); 
   };
-  // --------------------------------------------------------
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose();
       } else if (e.key === 'ArrowRight') {
-        // Navigate to the next image
         onNext();
       } else if (e.key === 'ArrowLeft') {
-        // Navigate to the previous image
         onPrev();
       }
     },
@@ -73,12 +70,10 @@ const Lightbox: React.FC<LightboxProps> = ({
   );
 
   useEffect(() => {
-    // Add the keydown listener when the lightbox opens
     document.addEventListener('keydown', handleKeyDown as any);
     document.body.style.overflow = 'hidden'; 
 
     return () => {
-      // Clean up the keydown listener when the lightbox closes
       document.removeEventListener('keydown', handleKeyDown as any);
       document.body.style.overflow = 'unset';
     };
@@ -88,7 +83,10 @@ const Lightbox: React.FC<LightboxProps> = ({
 
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-[100]"
+      // Added min-h-screen to ensure it covers 100% of the viewport height
+      className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-[100] min-h-screen"
+      // Added a subtle click handler to close the lightbox when clicking outside the image
+      onClick={onClose}
     >
         {/* CLOSE BUTTON (X) - Top Right - Clean Styling */}
       <button
@@ -98,11 +96,12 @@ const Lightbox: React.FC<LightboxProps> = ({
         &times;
       </button>
       
-      {/* Animated Image Container */}
+      {/* Animated Image Container - We stop the click event from closing the lightbox here */}
       <animated.div
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
+        onClick={(e) => e.stopPropagation()}
         style={{
           transform: x.to(x => `translateX(${x}px)`), 
         }}
