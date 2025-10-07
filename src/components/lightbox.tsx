@@ -49,9 +49,9 @@ const Lightbox: React.FC<LightboxProps> = ({
     const threshold = 50; 
 
     if (deltaX < -threshold) {
-      onNext(); // Swipe left
+      onNext(); // Swipe left -> Next image
     } else if (deltaX > threshold) {
-      onPrev(); // Swipe right
+      onPrev(); // Swipe right -> Previous image
     }
     api.start({ x: 0 }); 
   };
@@ -61,16 +61,24 @@ const Lightbox: React.FC<LightboxProps> = ({
     (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose();
-      } 
+      } else if (e.key === 'ArrowRight') {
+        // Navigate to the next image
+        onNext();
+      } else if (e.key === 'ArrowLeft') {
+        // Navigate to the previous image
+        onPrev();
+      }
     },
-    [onClose]
+    [onClose, onNext, onPrev]
   );
 
   useEffect(() => {
+    // Add the keydown listener when the lightbox opens
     document.addEventListener('keydown', handleKeyDown as any);
     document.body.style.overflow = 'hidden'; 
 
     return () => {
+      // Clean up the keydown listener when the lightbox closes
       document.removeEventListener('keydown', handleKeyDown as any);
       document.body.style.overflow = 'unset';
     };
