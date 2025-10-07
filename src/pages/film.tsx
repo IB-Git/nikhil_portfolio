@@ -5,16 +5,12 @@ import Image from 'next/image';
 import photoshootsData from '../../public/photoshoots.json'; 
 import Lightbox from '@/components/lightbox';
 
-// --- Helper function to flatten images for the Lightbox ---
 const getAllImages = (data: typeof photoshootsData, categoryId: string): string[] => {
   const category = data.find(item => item.id === categoryId);
   if (!category || !category.photoshoots) return [];
-  
-  // Flattens all images from all photoshoots in this category into a single array
   return category.photoshoots.flatMap(shoot => shoot.images);
 };
 
-// --- Helper function to get Tailwind class based on image count ---
 const getGridClass = (count: number) => {
   // Use 'lg:' prefix for big screen layout
   switch (count) {
@@ -39,18 +35,14 @@ const FilmPage = () => {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
-  // Flattened array of ALL images in the 'film' category for the Lightbox
   const allImages: string[] = useMemo(() => {
     return getAllImages(photoshootsData, 'film'); 
   }, []);
   
-  // Get the grouped photoshoot data
   const filmCategory = photoshootsData.find(item => item.id === 'film');
-  // Check for the new 'photoshoots' array
   const photoshoots = filmCategory?.photoshoots || []; 
 
   const openLightbox = (imageURL: string) => {
-    // Find the index of the clicked image in the flattened array
     const index = allImages.findIndex(img => img === imageURL);
     if (index !== -1) {
       setSelectedImageIndex(index);
