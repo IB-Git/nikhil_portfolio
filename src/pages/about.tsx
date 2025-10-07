@@ -11,7 +11,7 @@ function About() {
           </p>
           
           <div className="mt-8">
-            <p className="text-xl lg:text-2xl font-satoshi-light leading-relaxed text-gray-950">
+            <p className="text-xl lg:text-2xl font-satoshi-light leading-relaxed text-gray-750">
               <a 
                 href="mailto:nikhilnangarework@gmail.com" 
                 className="hover:text-gray-700 transition duration-200"
