@@ -3,15 +3,6 @@ import Image from 'next/image';
 import photoshootsData from '../../public/photoshoots.json'; 
 import Lightbox from '@/components/lightbox';
 
-const getAllImages = (data: typeof photoshootsData, categoryId: string): string[] => {
-  const category = data.find(item => item.id === categoryId);
-  if (!category || !('photoshoots' in category)) {
-      if ('images' in category) return category.images;
-      return [];
-  }
-  return category.photoshoots.flatMap(shoot => shoot.images);
-};
-
 const getGridClass = (count: number) => {
   switch (count) {
     case 1:
@@ -24,20 +15,21 @@ const getGridClass = (count: number) => {
       return 'lg:grid-cols-4'; 
   }
 };
-// -----------------------------------------------------------------
 
 
 const FilmPage = () => {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
-  const allImages: string[] = useMemo(() => {
-    return getAllImages(photoshootsData, 'film'); 
-  }, []);
-  
-  const filmCategory = photoshootsData.find(item => item.id === 'film');
-  const photoshoots = filmCategory && 'photoshoots' in filmCategory ? filmCategory.photoshoots : [];
+  const photoshoots = useMemo(() => {
+    const filmCategory = photoshootsData.find(item => item.id === 'film');
+    return filmCategory && 'photoshoots' in filmCategory ? filmCategory.photoshoots : [];
+  }, []); 
 
+  const allImages: string[] = useMemo(() => {
+    return photoshoots.flatMap(shoot => shoot.images);
+  }, [photoshoots]);
+  
   const openLightbox = (imageURL: string) => {
     const index = allImages.findIndex(img => img === imageURL);
     if (index !== -1) {
@@ -65,7 +57,7 @@ const FilmPage = () => {
   }
 
   return (
-    <div className="space-y-16 lg:space-y-24 p-4"> 
+    <div className="space-y-8 lg:space-y-16 p-4"> 
       {photoshoots.map((shoot) => {
         const imageCount = shoot.images.length;
         const gridClass = getGridClass(imageCount);
