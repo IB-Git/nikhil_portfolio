@@ -65,7 +65,7 @@ const FilmPage = () => {
         return (
           <div 
             key={shoot.id} 
-            className={`grid grid-cols-2 gap-2 lg:gap-4 ${gridClass}`} 
+            className={`grid grid-cols-2 gap-2 lg:gap-4 items-center ${gridClass}`} 
           >
             {shoot.images.map((imageURL: string) => (
               <div 

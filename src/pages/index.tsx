@@ -64,7 +64,7 @@ const Home = () => {
         return (
           <div 
             key={shoot.id} 
-            className={`grid grid-cols-2 gap-2 lg:gap-4 ${gridClass}`} 
+            className={`grid grid-cols-2 gap-2 lg:gap-4 items-center ${gridClass}`} 
           >
             {shoot.images.map((imageURL: string) => (
               <div 
@@ -74,7 +74,7 @@ const Home = () => {
               >
                   <Image
                     src={imageURL}
-                    alt={`Film Image ${imageURL}`}
+                    alt={`Index Image ${imageURL}`}
                     width={1000}
                     height={1000}
                     layout="responsive"
