@@ -73,7 +73,6 @@ const Lightbox: React.FC<LightboxProps> = ({
     document.addEventListener('keydown', handleKeyDown as any);
     document.documentElement.style.overflow = 'hidden'; 
     document.body.style.overflow = 'hidden'; 
-    // CRITICAL: Force body/html margin/padding to zero when lightbox is open
     document.body.style.margin = '0'; 
     document.body.style.padding = '0'; 
 
@@ -81,7 +80,6 @@ const Lightbox: React.FC<LightboxProps> = ({
       document.removeEventListener('keydown', handleKeyDown as any);
       document.documentElement.style.overflow = 'unset';
       document.body.style.overflow = 'unset';
-      // Restore original margin/padding on body/html
       document.body.style.margin = ''; 
       document.body.style.padding = ''; 
     };
@@ -91,7 +89,6 @@ const Lightbox: React.FC<LightboxProps> = ({
 
   return (
     <div
-      // CRITICAL FIX: Use inline style to force width, height, and zero margins/padding
       style={{
         width: '100vw',
         height: '100vh',
