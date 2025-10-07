@@ -71,11 +71,19 @@ const Lightbox: React.FC<LightboxProps> = ({
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown as any);
+    document.documentElement.style.overflow = 'hidden'; 
     document.body.style.overflow = 'hidden'; 
+    // CRITICAL: Force body/html margin/padding to zero when lightbox is open
+    document.body.style.margin = '0'; 
+    document.body.style.padding = '0'; 
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown as any);
+      document.documentElement.style.overflow = 'unset';
       document.body.style.overflow = 'unset';
+      // Restore original margin/padding on body/html
+      document.body.style.margin = ''; 
+      document.body.style.padding = ''; 
     };
   }, [handleKeyDown]);
 
@@ -83,9 +91,18 @@ const Lightbox: React.FC<LightboxProps> = ({
 
   return (
     <div
-      // Added min-h-screen to ensure it covers 100% of the viewport height
-      className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-[100] min-h-screen"
-      // Added a subtle click handler to close the lightbox when clicking outside the image
+      // CRITICAL FIX: Use inline style to force width, height, and zero margins/padding
+      style={{
+        width: '100vw',
+        height: '100vh',
+        margin: 0,
+        padding: 0,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+      }}
+      className="fixed bg-black bg-opacity-90 flex items-center justify-center z-[100]"
       onClick={onClose}
     >
         {/* CLOSE BUTTON (X) - Top Right - Clean Styling */}
@@ -96,7 +113,7 @@ const Lightbox: React.FC<LightboxProps> = ({
         &times;
       </button>
       
-      {/* Animated Image Container - We stop the click event from closing the lightbox here */}
+      {/* Animated Image Container */}
       <animated.div
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
@@ -105,7 +122,7 @@ const Lightbox: React.FC<LightboxProps> = ({
         style={{
           transform: x.to(x => `translateX(${x}px)`), 
         }}
-        className="relative w-full h-full max-w-5xl max-h-[90vh] flex items-center justify-center p-4" 
+        className="relative w-full h-full max-w-5xl max-h-full flex items-center justify-center p-4" 
       >
         <Image
           src={currentImage}
