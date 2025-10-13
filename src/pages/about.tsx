@@ -9,7 +9,7 @@ function About() {
             and his father&apos;s collection of old film stocks.
           </p>
           
-          <div className="mt-8 flex justify-between w-full">
+          <div className="mt-8 flex flex-col md:flex-row md:justify-between w-full">
             
             <p className="text-lg lg:text-xl font-satoshi-light leading-relaxed text-gray-750">
               <a 
@@ -20,7 +20,7 @@ function About() {
               </a>
             </p>
 
-            <p className="text-lg lg:text-xl font-satoshi-light leading-relaxed text-gray-750">
+            <p className="text-lg lg:text-xl font-satoshi-light leading-relaxed text-gray-750 md:mb-0 mb-2">
               <a 
                 href="tel:+918888291886" 
                 className="hover:text-gray-700 transition duration-200"
