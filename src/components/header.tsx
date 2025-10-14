@@ -16,7 +16,7 @@ const Header = () => {
         {/* 1. NIKHIL NANGARE (Name) / home */}
         <Link 
           href="/" 
-          className={`text-lg lg:text-2xl font-satoshi-regular tracking-tight transition duration-200 ${
+          className={`text-base lg:text-2xl font-satoshi-regular tracking-tight transition duration-200 ${
             isDefaultActive ? 'font-bold': 'hover:text-gray-700' 
           }`}
         >
