@@ -13,7 +13,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       {/* Page Title & SEO (Integrated from PageTitle.tsx) */}
       <Head>
         <title>Nikhil Nangare Photography</title>      
-        <link rel="canonical" href="https://www.nikhilnangare.art" /> 
+        <link rel="canonical" href="https://www.nikhilnangare.website" /> 
       </Head>
 
       {/* Header/Navigation Area */}
